@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 const CONFIG = {
     topics: [
@@ -49,7 +49,7 @@ export default function JournalistForm() {
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     const handleChange = (field, value) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
+        setFormData(prev => ({...prev, [field]: value}));
 
         if (field === 'media') {
             const input = value.toLowerCase();
@@ -70,14 +70,14 @@ export default function JournalistForm() {
     };
 
     const selectSuggestion = (media) => {
-        setFormData(prev => ({ ...prev, media }));
+        setFormData(prev => ({...prev, media}));
         setShowSuggestions(false);
     };
 
     const handleSubmit = () => {
         if (Object.values(formData).every(v => v)) {
             const fullDeadline = `${formData.deadlineDate} ${formData.deadlineTime}`;
-            console.log('Form submitted:', { ...formData, deadline: fullDeadline });
+            console.log('Form submitted:', {...formData, deadline: fullDeadline});
             alert('Форма отправлена! Данные в консоли.');
         } else {
             alert('Заполните все поля');
@@ -119,7 +119,8 @@ export default function JournalistForm() {
                         placeholder="Начните вводить название"
                     />
                     {showSuggestions && (
-                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto">
+                        <div
+                            className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto">
                             {suggestions.map(media => (
                                 <div
                                     key={media}
@@ -195,6 +196,20 @@ export default function JournalistForm() {
                         rows="5"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         placeholder="Опишите ваш запрос..."
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Добавить файл
+                    </label>
+                    <input
+                        id="file-input"
+                        name="file"
+                        type="file"
+                        multiple
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        accept="*/*"
                     />
                 </div>
 
